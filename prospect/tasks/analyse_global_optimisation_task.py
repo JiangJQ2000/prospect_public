@@ -70,9 +70,9 @@ class AnalyseGlobalOptimisationTask(BaseAnalyseTask):
                 if bestfits[idx_rep]['loglkl'] == np.inf:
                     file.write(f"{idx_rep} \t --- no optimisations finished ---\n")
                 else:
-                    file.write(f"{idx_rep} \t {bestfits[idx_rep]['loglkl']:.10e} \t ")
-                    file.write(f"{bestfits[idx_rep]['initial_loglkl']:.10e} \t ")
-                    file.write(" \t ".join([str(np.round(bestfits[idx_rep]['position'][name][0], 10)) for name in param_names])+"\n")
+                    file.write(f"{idx_rep} \t {np.format_float_scientific(bestfits[idx_rep]['loglkl'])} \t ")
+                    file.write(f"{np.format_float_scientific(bestfits[idx_rep]['initial_loglkl'])} \t ")
+                    file.write(" \t ".join([np.format_float_positional(bestfits[idx_rep]['position'][name][0]) for name in param_names])+"\n")
 
     def plot_schedule(self, optimise_tasks):
         # Collect nested dict data structure
