@@ -70,12 +70,6 @@ class Scheduler:
     def finalize(self, executor) -> None:
         # Things to do before shutting down
         if self.config.io.write:
-            if self.config.run.jobtype == 'profile':
-                analysis_task = self.get_profile_analysis()
-                analysis_task.run([task for task in self.tasks.done.values() if task.id in analysis_task.required_task_ids])
-            elif self.config.run.jobtype == 'global_optimisation':
-                analysis_task = self.get_global_optimisation_analysis()
-                analysis_task.run([task for task in self.tasks.done.values() if task.id in analysis_task.required_task_ids])
             self.dump_snapshot()
             self.status_update()
 
